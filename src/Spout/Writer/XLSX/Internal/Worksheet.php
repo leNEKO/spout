@@ -215,6 +215,9 @@ EOD;
 
         if (CellHelper::isNonEmptyString($cellValue)) {
             $cellXML .= $this->getCellXMLFragmentForNonEmptyString($cellValue);
+        } else if (CellHelper::isDateTime($cellValue)){
+            $date = 25569 + ($cellValue->getTimestamp() / 86400);
+            $cellXML .= ' t="n"><v>' . number_format($date, 10, ".", "") . '</v></c>';
         } else if (CellHelper::isBoolean($cellValue)) {
             $cellXML .= ' t="b"><v>' . intval($cellValue) . '</v></c>';
         } else if (CellHelper::isNumeric($cellValue)) {

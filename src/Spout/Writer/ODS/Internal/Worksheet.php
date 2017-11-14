@@ -208,6 +208,11 @@ class Worksheet implements WorksheetInterface
             $data .= ' office:value-type="float" calcext:value-type="float" office:value="' . $cellValue . '">';
             $data .= '<text:p>' . $cellValue . '</text:p>';
             $data .= '</table:table-cell>';
+        } else if (CellHelper::isDateTime($cellValue)) {
+            $date_str = $cellValue->format(\DateTime::W3C);
+            $data .= ' office:value-type="date" calcext:value-type="date" office:date-value="' . $date_str . '">';
+            $data .= '<text:p>' . $date_str . '</text:p>';
+            $data .= '</table:table-cell>';
         } else if (empty($cellValue)) {
             $data .= '/>';
         } else {

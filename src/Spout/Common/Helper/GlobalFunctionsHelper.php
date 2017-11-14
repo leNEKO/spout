@@ -103,6 +103,12 @@ class GlobalFunctionsHelper
      */
     public function fputcsv($handle, array $fields, $delimiter = null, $enclosure = null)
     {
+        // convert DateTime object to string
+        foreach($fields as $k => $value){
+            if(is_object($value) && (get_class($value) === 'DateTime')){
+                $fields[$k] = $value->format(\DateTime::W3C);
+            }
+        }
         return fputcsv($handle, $fields, $delimiter, $enclosure);
     }
 

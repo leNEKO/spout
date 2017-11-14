@@ -88,4 +88,15 @@ class CellHelper
     {
         return gettype($value) === 'boolean';
     }
+
+    /**
+     * Returns whether the given value is a DateTime object.
+     *
+     * @param $value
+     * @return bool Whether the given value is DateTime
+     */
+    public static function isDateTime($value)
+    {
+        return (is_object($value) && get_class($value) === 'DateTime');
+    }
 }
